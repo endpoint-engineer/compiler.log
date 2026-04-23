@@ -13,14 +13,17 @@ export default function App() {
   // Playground State
   const [sourceCode, setSourceCode] = useState('');
   const [output, setOutput] = useState<{ type: 'success' | 'error', lines: string[] } | null>(null);
+  const [diagnostics, setDiagnostics] = useState({ time: "0.00", memory: "0.00", status: "idle" });
 
   const handleRun = () => {
+    const startTime = performance.now();
+    let runStatus = "success";
     try {
       if (!sourceCode.trim()) {
         setOutput({ type: 'success', lines: ['> No code provided.'] });
+        runStatus = "success";
         return;
-      }
-      const result = runCode(sourceCode);
+      }      const result = runCode(sourceCode);
       if (result.length === 0) {
         setOutput({ type: 'success', lines: ['> Compilation Complete. (No output)'] });
       } else {
@@ -28,6 +31,16 @@ export default function App() {
       }
     } catch (err: any) {
       setOutput({ type: 'error', lines: [err.message] });
+      runStatus = "error";
+    } finally {
+      const endTime = performance.now();
+      const executionTime = (endTime - startTime).toFixed(2);
+      const memoryUsage = (performance as any).memory ? ((performance as any).memory.usedJSHeapSize / 1048576).toFixed(2) : "0.00";
+      setDiagnostics({
+        time: executionTime,
+        memory: memoryUsage,
+        status: runStatus
+      });
     }
   };
 
@@ -90,6 +103,7 @@ export default function App() {
               handleRun={handleRun}
               handleLoadExample={handleLoadExample}
               clearOutput={clearOutput}
+              diagnostics={diagnostics}
             />
           )}
           {/* {['Changelog', 'Community'].includes(activeTab) && (
@@ -225,7 +239,7 @@ function DocumentationView() {
   );
 }
 
-function PlaygroundView({ sourceCode, setSourceCode, output, handleRun, handleLoadExample, clearOutput }: any) {
+function PlaygroundView({ sourceCode, setSourceCode, output, handleRun, handleLoadExample, clearOutput, diagnostics }: any) {
   return (
     <div className="flex flex-col p-8 md:p-12 h-fit md:h-full overflow-y-auto">
       <div className="mb-8">
@@ -322,22 +336,22 @@ function PlaygroundView({ sourceCode, setSourceCode, output, handleRun, handleLo
                 <Database className="w-4 h-4 text-gray-400 mt-1" />
                 <div>
                   <div className="text-[10px] font-extrabold tracking-widest uppercase text-gray-800 mb-0.5">Memory Usage</div>
-                  <div className="text-xs text-gray-500 font-mono">Peak: 12.4 MB</div>
+                  <div className="text-xs text-gray-500 font-mono">{diagnostics.memory} MB</div>
                 </div>
               </div>
               <div className="flex gap-4">
                 <Clock className="w-4 h-4 text-gray-400 mt-1" />
                 <div>
                   <div className="text-[10px] font-extrabold tracking-widest uppercase text-gray-800 mb-0.5">Execution Time</div>
-                  <div className="text-xs text-gray-500 font-mono">0.42s (sys: 0.11s, user: 0.31s)</div>
+                  <div className="text-xs text-gray-500 font-mono">{diagnostics.time} ms</div>
                 </div>
               </div>
               <div className="flex gap-4">
-                <CheckCircle className={`w-4 h-4 mt-1 ${output?.type === 'error' ? 'text-red-500' : 'text-green-600'}`} />
+                <CheckCircle className={`w-4 h-4 mt-1 ${diagnostics.status === 'error' ? 'text-red-500' : 'text-green-600'}`} />
                 <div>
                   <div className="text-[10px] font-extrabold tracking-widest uppercase text-gray-800 mb-0.5">Status</div>
                   <div className="text-xs text-gray-500 font-mono">
-                    {output?.type === 'error' ? 'Failed (Exit Code 1)' : 'Success (Exit Code 0)'}
+                    {diagnostics.status === 'idle' ? 'Idle' : (diagnostics.status === 'error' ? 'Failed (Exit Code 1)' : 'Success (Exit Code 0)')}
                   </div>
                 </div>
               </div>
