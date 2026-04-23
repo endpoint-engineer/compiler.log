@@ -8,7 +8,7 @@ import { Search, BookOpen, Cpu, ShieldCheck, Code, Settings, Trash2, Play, Datab
 import { runCode } from './compiler/compiler';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'Home' | 'Documentation' | /*'Changelog' |*/ 'Playground' /*| 'Community'*/> ('Playground');
+  const [activeTab, setActiveTab] = useState<'Home' | 'Documentation' | /*'Changelog' |*/ 'Playground' /*| 'Community'*/> ('Home');
 
   // Playground State
   const [sourceCode, setSourceCode] = useState('');
@@ -159,11 +159,43 @@ function HomeView({ setActiveTab }: { setActiveTab: (tab: any) => void }) {
         </div>
       </div>
       
-      <div className="mt-32 border-t border-gray-100 pt-16">
-        <span className="text-[10px] uppercase tracking-[3px] font-extrabold text-accent mb-6 block">Core Capabilities</span>
-        <h2 className="font-serif text-4xl mb-8 font-bold">Engineered for Scale</h2>
+      <div className="mt-20 border-t border-gray-200 pt-20 pb-32">
+        <div className="max-w-3xl mb-16">
+          <span className="text-[10px] uppercase tracking-[3px] font-extrabold text-accent mb-6 block">Technical Specification</span>
+          <h2 className="font-serif text-4xl mb-6 font-bold">Academic context. Real-world insights.</h2>
+          <p className="text-gray-600 leading-relaxed text-lg font-sans">
+            Designed as a foundational exploration into compiler theory, this mini-language translates raw syntax into actionable execution entirely from scratch. It serves as a transparent educational window into lexical analysis, recursive parsing, and interpretation.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
+          <div className="flex flex-col">
+            <span className="font-mono text-xs text-gray-400 mb-5 pb-3 border-b border-gray-100 w-full block">01</span>
+            <h3 className="font-serif font-bold text-xl mb-3 text-ink">Character-Stream Tokenization</h3>
+            <p className="text-sm text-gray-600 leading-relaxed font-sans">
+              A custom-built scanner that performs high-speed character processing to generate typed tokens, handling whitespace and complex syntax with zero external dependencies.
+            </p>
+          </div>
+          
+          <div className="flex flex-col">
+            <span className="font-mono text-xs text-gray-400 mb-5 pb-3 border-b border-gray-100 w-full block">02</span>
+            <h3 className="font-serif font-bold text-xl mb-3 text-ink">Hardware-Level Diagnostics</h3>
+            <p className="text-sm text-gray-600 leading-relaxed font-sans">
+              Equipped with native browser hooks to monitor JS heap memory consumption and execution latency, providing instant feedback on user-device performance.
+            </p>
+          </div>
+
+          <div className="flex flex-col">
+            <span className="font-mono text-xs text-gray-400 mb-5 pb-3 border-b border-gray-100 w-full block">03</span>
+            <h3 className="font-serif font-bold text-xl mb-3 text-ink">Abstract Syntax Tree Parsing</h3>
+            <p className="text-sm text-gray-600 leading-relaxed font-sans">
+              Transforms flat arrays of string tokens into a robust, hierarchical data structure. This defines order-of-operations and grammar rules for immediate, safe interpretation.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
+    
   );
 }
 
