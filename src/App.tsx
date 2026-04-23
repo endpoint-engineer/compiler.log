@@ -194,6 +194,22 @@ function HomeView({ setActiveTab }: { setActiveTab: (tab: any) => void }) {
           </div>
         </div>
       </div>
+      
+      <footer className="w-full border-t border-gray-100 py-8 mt-auto">
+        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500 font-sans">
+          <div className="flex items-center gap-4">
+            <span className="font-bold text-ink">Compiler.Log</span>
+            <div className="flex items-center gap-2 border border-gray-200 px-3 py-1 rounded-full text-xs">
+              <span className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] animate-pulse"></span>
+              Operational
+            </div>
+          </div>
+
+          <div>
+            &copy; {new Date().getFullYear()}
+          </div>
+        </div>
+      </footer>
     </div>
     
   );
