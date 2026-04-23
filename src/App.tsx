@@ -145,15 +145,20 @@ function HomeView({ setActiveTab }: { setActiveTab: (tab: any) => void }) {
               <span className="text-[10px] text-gray-400 tracking-wider">v1.0.4</span>
             </div>
             <div className="font-mono text-[13px] leading-relaxed text-gray-800">
-              <span className="text-gray-300 mr-4 select-none">01 |</span> <span className="text-accent
-              ">let</span> config = Config::load(<span className="text-[#059669]">"arch.toml"</span>);<br/>
-              <span className="text-gray-300 mr-4 select-none">02 |</span> <br/>
-              <span className="text-gray-300 mr-4 select-none">03 |</span> <span className="text-accent
-              ">let</span> compiler = Compiler::new(config);<br/>
-              <span className="text-gray-300 mr-4 select-none">04 |</span> <span className="text-accent
-              ">let</span> target = compiler.build_target(<span className="text-[#059669]">"release"</span>);<br/>
-              <span className="text-gray-300 mr-4 select-none">05 |</span> <br/>
-              <span className="text-gray-300 mr-4 select-none">06 |</span> target.execute();
+              {/* <span className="text-gray-300 mr-4 select-none">01 |</span> <span className="text-gray-400">// Basic arithmetic and variable assignment</span><br/> */}
+              <span className="text-gray-300 mr-4 select-none">02 |</span> <span className="text-accent">let</span> alpha = <span className="text-[#059669]">10</span>;<br/>
+              <span className="text-gray-300 mr-4 select-none">03 |</span> <span className="text-accent">let</span> beta = <span className="text-[#059669]">20</span>;<br/>
+              <span className="text-gray-300 mr-4 select-none">04 |</span> <br/>
+              {/* <span className="text-gray-300 mr-4 select-none">05 |</span> <span className="text-gray-400">// Logical operations for the engine</span><br/> */}
+              <span className="text-gray-300 mr-4 select-none">06 |</span> <span className="text-accent">let</span> result = (alpha + beta) * <span className="text-[#059669]">5</span>;<br/>
+              <span className="text-gray-300 mr-4 select-none">07 |</span> <br/>
+              <span className="text-gray-300 mr-4 select-none">08 |</span> <span className="text-accent">if</span> (result &gt; <span className="text-[#059669]">100</span>) {'{'}<br/>
+              <span className="text-gray-300 mr-4 select-none">09 |</span> &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-accent">print</span> <span className="text-[#059669]">"High Performance Mode"</span>;<br/>
+              <span className="text-gray-300 mr-4 select-none">10 |</span> {'}'} <span className="text-accent">else</span> {'{'}<br/>
+              <span className="text-gray-300 mr-4 select-none">11 |</span> &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-accent">print</span> <span className="text-[#059669]">"Standard Execution"</span>;<br/>
+              <span className="text-gray-300 mr-4 select-none">12 |</span> {'}'}<br/>
+              <span className="text-gray-300 mr-4 select-none">13 |</span> <br/>
+              <span className="text-gray-300 mr-4 select-none">14 |</span> <span className="text-accent">print</span> result;
             </div>
           </div>
         </div>
